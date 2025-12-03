@@ -16,11 +16,12 @@ gcc main.o csv_reader.o action_executor.o default_automate.o -o afd_project
 ./afd_projet <csv_file_path>
 ```
 
-Tableau des actions existantes (colonne "Action"). Les arguments sont a inserer dans la colonne "Action_Parametres"
-|Afficher |Affiche le message contenu dans "Action_Parametres" dans la console|
-|Attendre |Attend (sleep) la duree indiquee dans "Action_Parametres"|
-|Executer_Cmd |Execution (systeme) de la commande indiquee dans "Action_Parametres"|
-|Log |Ajoute le contenu de "Action_Parametres" dans le fichiers "logs.log"|�
+| Action       | Description                                                               |
+| ------------ | ------------------------------------------------------------------------- |
+| Afficher     | Affiche le message contenu dans **Action_Parametres** dans la console     |
+| Attendre     | Attend (sleep) la durée indiquée dans **Action_Parametres** (en secondes) |
+| Executer_Cmd | Exécute la commande système indiquée dans **Action_Parametres**           |
+| Log          | Ajoute le contenu de **Action_Parametres** dans le fichier `logs.log`     |
 
 # Securite
 
@@ -31,14 +32,14 @@ De plus, les fonctions de "string.h" utilisees sont les versions "secure" (strnc
 
 Toutes les erreurs sont redirigées vers la sortie "stderr" et ont le format "Err : <description de l'erreur> <details de l'erreur si necessaire>".
 
-Tableau des erreurs et leurs solutions 
-|Erreur|Solution|
-----------------
-|Blocage (etat <id_etat> = pas de transition)|Vous n'avez pas specifie de ID_Etat_Suivant ou alors il est incorrect. Veuillez en ajouter un. (9999 pour fin de programme).|
-|Ouverture CSV / Chargement automate |Le fichier csv que vous avez specifie n'existe pas ou les permissions en lecture sont insuffisantes. Verifiez le chemin donne et verifiez les permissions (chmod +r <file.csv>)|
-|Allocation memoire afd / Chargement automate| Il n'y a pas assez de place en memoire pour charger votre AFD. Liberez de la memoire (fermez des programmes gourmands, relancez votre machine si fuites memoires presentes)|
-[Action ID <id> inconnu | Vous avez specifie une action inexistante. Veuillez vous referer a la table des actions ci-dessus (section utilisation)|
-|Ouverture log file / ecriture log file|Pas de permissions pour ouvrir / ecrire dans le fichier "logs.log" (repertoire courant d'execution du script)|
+| Erreur                                       | Solution                                                                                                                           |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Blocage (etat <id_etat> = pas de transition) | Vérifiez que **ID_Etat_Suivant** est correct. Ajoutez un ID valide (ex : 9999 pour fin de programme)                               |
+| Ouverture CSV / Chargement automate          | Le fichier CSV n’existe pas ou les permissions de lecture sont insuffisantes. Vérifiez le chemin et utilisez `chmod +r <file.csv>` |
+| Allocation mémoire AFD / Chargement automate | Pas assez de mémoire pour charger l’automate. Fermez des programmes gourmands ou relancez la machine si nécessaire                 |
+| Action ID <id> inconnue                      | Vous avez spécifié une action inexistante. Référez-vous à la table des actions                                                     |
+| Ouverture/écriture fichier log               | Pas de permissions pour ouvrir/écrire dans `logs.log`. Vérifiez les droits sur le répertoire courant                               |
+
 
 # Journalisation
 
