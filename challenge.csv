@@ -1,0 +1,8 @@
+ID_Etat;Nom_Etat;Transition_Evenement;ID_Etat_Suivant;Action;Action_Parametres
+0;A;Start;1;Afficher;"Challenge start!"
+1;B;Transition;2;Executer_Cmd;"python3 challenge/crawl_img.py 'https://www.flickr.com/search/?license=9,10&text=car' 'images'"
+2;C;Transition;3;Attendre;2
+3;D;Transition;4;Executer_Cmd;"python3 challenge/exifdatas.py 'images'"
+4;E;Transition;5;Attendre;2
+5;F;Transition;9999;Executer_Cmd;"python3 challenge/gps.py 'images'"
+9999;E;End;Q;Afficher;"Execution terminee"
