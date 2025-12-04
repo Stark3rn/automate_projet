@@ -48,13 +48,13 @@ Toutes les erreurs sont redirigees vers la sortie "stderr" et ont le format "Err
 # Structure du code
 ```
 | ---- action_executor.c // Fonctions des differentes actions + fonction d'execution des actions
-| ---- action_executor.h // Header d'inclusion du fichier "action_executor.c" »
-| ---- action_types.h // Association id_action -> nom_action et definition structure "Action" »
+| ---- action_executor.h // Header d'inclusion du fichier "action_executor.c"
+| ---- action_types.h // Association id_action -> nom_action et definition structure "Action"
 | ---- afd.csv // automate de base pour tester les differentes actions
 | ---- config_structs.h // structures transition & AFD + parametres ID de fin & nb transis max
 | ---- csv_reader.c // Conversion CSV -> structure exploitable par l'automate
-| ---- csv_reader.h // Header d'inclusion du fichier "csv_reader.c" »
+| ---- csv_reader.h // Header d'inclusion du fichier "csv_reader.c"
 | ---- default_automate.c // Fonctions de comportement de l'automate par defaut
-| ---- default_automate.h // Header d'inclusion du fichier "default_automate.c" �
+| ---- default_automate.h // Header d'inclusion du fichier "default_automate.c"
 | ---- main.c // Programme principal : exploite les differents fichiers pour lancer un automate
 ```
