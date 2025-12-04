@@ -6,7 +6,7 @@ typedef enum {
     ACTION_ATTENDRE = 2,
     ACTION_EXECUTER_CMD = 3,
     ACTION_LOG = 4,
-    ACTION_BLOQUER_UP = 5,
+    ACTION_BLOQUER_IP = 5,
     ACTION_AUCUNE = 99
 } ActionID;
 

@@ -1,0 +1,5 @@
+ID_Etat;Critere;Operateur;Valeur;Action;Action_Paramètres
+1;Utilisateur;!=;root;Executer_Cmd;"pwd"
+2;Utilisateur;==;stark;Afficher;"Acces refuse"
+2;Temps_Attente;>;5;Afficher;"Attente prolongee"
+3;CPU_Usage;>;80;Limiter_Usage;"Attention charge CPU"

@@ -54,6 +54,8 @@ void execute_action(Action action) {
         case ACTION_LOG:
             action_log(action.parameters);
             break;
+        case ACTION_AUCUNE:
+            break;
         default:
             fprintf(stderr,"ERR : action ID %d inconnu\n",action.id);
     }

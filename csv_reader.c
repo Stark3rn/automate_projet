@@ -25,8 +25,9 @@ AFD *load_all_transitions(const char *filename) {
         fclose(f);
         return(NULL);
     }
-    afd->count = 0;
+    afd->transition_count = 0;
     afd->current_state_id=0;
+    afd->rule_count = 0;
 
     char line[256];
 
@@ -37,10 +38,10 @@ AFD *load_all_transitions(const char *filename) {
         return(NULL);
     }
 
-    while(fgets(line,sizeof(line),f) != NULL && afd->count < MAX_TRANSITIONS) {
+    while(fgets(line,sizeof(line),f) != NULL && afd->transition_count < MAX_TRANSITIONS) {
         if(strlen(line)<=1) continue;
 
-        TransitionConfig *config = &afd->transitions[afd->count];
+        TransitionConfig *config = &afd->transitions[afd->transition_count];
         char *token;
         int col_index = 0;
 
@@ -80,9 +81,58 @@ AFD *load_all_transitions(const char *filename) {
         }
 
         if(tokens_read >=6) {
-            afd->count++;
+            afd->transition_count++;
         }
     }
     fclose(f);
     return(afd);
+}
+
+int load_decision_rules(AFD *afd, const char *filename) {
+    FILE *f = fopen(filename, "r");
+    if(f == NULL) {
+        fprintf(stderr,"ERR : ouverture DecisionTree csv\n");
+        return(-1);
+    }
+
+    afd->rule_count = 0;
+    char line[256];
+
+    if(fgets(line, sizeof(line), f) == NULL) {
+        fprintf(stderr,"ERR : DecisionTree CSV vide\n");
+        fclose(f);
+        return(-1);
+    }
+
+    while(fgets(line, sizeof(line), f) != NULL && afd->rule_count < MAX_DECISION_RULES) {
+        if(strlen(line) <= 1) continue;
+
+        DecisionRule *rule = &afd->decision_rules[afd->rule_count];
+        char *token;
+        int col_index = 0;
+        char temp_line[256];
+        strcpy(temp_line, line);
+
+        token = strtok(temp_line, ";");
+        while(token != NULL) {
+            token[strcspn(token, "\r\n")] = 0;
+
+            switch (col_index) {
+                case 0: rule->id_etat = atoi(token); break;
+                case 1: strncpy(rule->critere, token, 49); rule->critere[49] = '\0'; break;
+                case 2: strncpy(rule->operateur, token, 4); rule->operateur[9] = '\0'; break;
+                case 3: strncpy(rule->valeur, token, 49); rule->valeur[49] = '\0'; break;
+                case 4: rule->action_id = action_name_to_id(token); break;
+                case 5: strncpy(rule->action_params, token, 254); rule->action_params[254] = '\0'; break;
+            }
+            token = strtok(NULL, ";");
+            col_index++;
+        }
+        
+        if(col_index >= 6) {
+            afd->rule_count++;
+        }
+    }
+    fclose(f);
+    return(0);
 }

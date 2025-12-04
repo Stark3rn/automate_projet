@@ -1,0 +1,7 @@
+ID_Etat;Nom_Etat;Transition_Evenement;ID_Etat_Suivant;Action;Action_Parametres
+0;A;Start;1;Afficher;"Bienvenue, commencez."
+1;B;Transition;2;Attendre;10
+2;C;Transition;3;Executer_Cmd;"sudo pacman -Syu"
+3;D;Transition;4;Executer_Cmd;"ls -al"
+4;E;Transition;9999;Attendre;5
+9999;F;End;Q;Afficher;"Execution terminée"
