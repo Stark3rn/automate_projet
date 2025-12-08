@@ -1,0 +1,8 @@
+ID_Condition;Condition;Valeur_Possible
+1;Utilisateur;root,admin,guest
+2;CPU_Usage;0-100
+3;RAM_Usage;0-Max
+4;Alerte_Securite;critique,mineure,moyenne
+5;Temps_Attente;0-60
+6;Commande_Executee;oui,non
+7;Reponse_Echec;oui,non

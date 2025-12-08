@@ -28,8 +28,37 @@ char *get_current_user() {
     return user;
 }
 
-int get_current_cpu_usage() {
-    return 85;
+int get_cpu_usage_int() {
+    static long prev_idle = 0, prev_total = 0;
+    long user, nice, system, idle, iowait, irq, softirq, steal;
+    long total, total_diff, idle_diff;
+    FILE *fp;
+
+    fp = fopen("/proc/stat", "r");
+    if (fp == NULL) {
+        perror("fopen failed");
+        return -1;
+    }
+
+    fscanf(fp, "cpu %ld %ld %ld %ld %ld %ld %ld %ld",
+           &user, &nice, &system, &idle, &iowait,
+           &irq, &softirq, &steal);
+
+    fclose(fp);
+
+    idle += iowait;
+    total = user + nice + system + idle + irq + softirq + steal;
+
+    total_diff = total - prev_total;
+    idle_diff = idle - prev_idle;
+
+    prev_total = total;
+    prev_idle = idle;
+
+    if (total_diff == 0)
+        return 0;
+
+    return (int)(100 * (total_diff - idle_diff) / total_diff);
 }
 
 int get_current_wait_time() {
@@ -59,7 +88,7 @@ bool compare_integer(int current, const char *op, const char *target_str) {
 }
 
 bool evaluate_condition(const DecisionRule *rule) {
-    printf("Evaluating Rule: %s %s %s...\n", rule->critere, rule->operateur, rule->valeur);
+    printf("Comparaison Regle : %s %s %s...\n", rule->critere, rule->operateur, rule->valeur);
     bool result = false;
     char *current_user = NULL;
 
