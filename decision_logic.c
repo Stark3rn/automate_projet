@@ -28,7 +28,7 @@ char *get_current_user() {
     return user;
 }
 
-int get_cpu_usage_int() {
+int get_current_cpu_usage() {
     static long prev_idle = 0, prev_total = 0;
     long user, nice, system, idle, iowait, irq, softirq, steal;
     long total, total_diff, idle_diff;
