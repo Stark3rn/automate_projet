@@ -9,8 +9,11 @@ ActionID action_name_to_id(const char *name) {
     if(strcmp(name, "Attendre")== 0) return ACTION_ATTENDRE;
     if(strcmp(name, "Executer_Cmd")== 0) return ACTION_EXECUTER_CMD;
     if(strcmp(name, "Log")== 0) return ACTION_LOG;
+    if(strcmp(name, "Bloquer_IP")== 0) return ACTION_BLOQUER_IP;
+    if(strcmp(name, "Limiter_Usage")== 0) return ACTION_LIMITER_USAGE;
     return(ACTION_AUCUNE);
 }
+
 
 AFD *load_all_transitions(const char *filename) {
     FILE *f = fopen(filename, "r");
