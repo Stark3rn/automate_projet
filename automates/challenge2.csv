@@ -1,0 +1,9 @@
+ID_Etat;Nom_Etat;Transition_Evenement;ID_Etat_Suivant;Action;Action_Parametres
+0;A;Start;1;Afficher;"Challenge 2 start!"
+1;B;Transition;2;Executer_Cmd;"python3 challenge2/trieur.py"
+2;C;Transition;3;Attendre;2
+3;D;Transition;4;Executer_Cmd;"python3 challenge2/ouvrir_gmap.py"
+4;E;Transition;5;Attendre;2
+5;F;Transition;6;Afficher;"Ouverture des images avec metadatas modifiees"
+6;G;Transition;9999;Executer_Cmd;"python3 challenge2/ouvrir_gmap.py 'challenge2/images_gps_modifiees'"
+9999;E;End;Q;Afficher;"Execution terminee"

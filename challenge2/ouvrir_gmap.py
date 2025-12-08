@@ -21,11 +21,17 @@ def get_gps(exif_data):
     return gps_info
 
 def dms_to_decimal(dms, ref):
-    deg, min_, sec = dms
-    decimal = deg[0] / deg[1] + (min_[0] / min_[1]) / 60 + (sec[0] / sec[1]) / 3600
+    deg = float(dms[0])
+    minute = float(dms[1])
+    sec = float(dms[2])
+
+    decimal = deg + (minute / 60) + (sec / 3600)
+
     if ref in ["S", "W"]:
         decimal = -decimal
+
     return decimal
+
 
 for fichier in os.listdir(dossier_gps):
     chemin = os.path.join(dossier_gps, fichier)

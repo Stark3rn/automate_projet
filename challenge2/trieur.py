@@ -29,12 +29,6 @@ lat_str, lon_str = args.localisation.split(",")
 latitude = float(lat_str)
 longitude = float(lon_str)
 
-GPS_LAT = decimal_to_dms(latitude)
-GPS_LON = decimal_to_dms(longitude)
-
-GPS_LAT_REF = "N" if latitude >= 0 else "S"
-GPS_LON_REF = "E" if longitude >= 0 else "W"
-
 def decimal_to_dms(decimal):
     decimal = float(decimal)
     deg = int(decimal)
@@ -42,6 +36,12 @@ def decimal_to_dms(decimal):
     minute = int(min_float)
     sec = int((min_float - minute) * 60)
     return ((abs(deg), 1), (minute, 1), (sec, 1))
+
+GPS_LAT = decimal_to_dms(latitude)
+GPS_LON = decimal_to_dms(longitude)
+
+GPS_LAT_REF = "N" if latitude >= 0 else "S"
+GPS_LON_REF = "E" if longitude >= 0 else "W"
 
 def get_gps(exif_data):
     gps_info = {}
